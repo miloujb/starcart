@@ -44,9 +44,22 @@ const Characters = () => {
 					<Card key={nanoid()}>
 						<Card.Content>
 							<Card.Header>{character.name}</Card.Header>
+							<Card.Meta>Films: {character.films.length}</Card.Meta>
+							Height: {character.height} cm
+							Weight: {character.mass} kg
+							Gender: {character.gender}
+							Eye Colour: {character.eye_color}
+							Hair Colour: {character.hair_color}
 						</Card.Content>
-
-
+						<Card.Content extra>
+							<Button
+								icon={{ name: 'plus', size: 'small' }}
+								data-title={character.name}
+								positive
+								content="Add to faves"
+								onClick={addToFavourites}
+							/>
+						</Card.Content>
 					</Card>
 				))}
 			</Card.Group>
