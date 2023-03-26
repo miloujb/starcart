@@ -29,12 +29,12 @@ const Characters = () => {
 	const {data, isError, isLoading} = useGetCharactersQuery();
 	const dispatch = useDispatch();
 
-	const selectCharacters = e => {
-		const {name} = e.target.dataset();
-		const character = data.results.find(character => character.name === name);
+	const selectCharacter = e => {
+		const { title } = e.currentTarget.dataset;
+		const character = data.results.find(character => character.name === title);
 		return character
 	}
-	const addToFavourites = e => dispatch(addFave(selectCharacters(e)));
+	const addToFavourites = e => dispatch(addFave(selectCharacter(e)));
 
 	const handlePagination = (e, {page}) => {
 		setPage(page);
@@ -79,7 +79,6 @@ const Characters = () => {
 		)
 	}
 	else if (data?.results?.length === 0) {
-		console.log("I'm in here")
 		return <Message
 			warning>no
 			films
