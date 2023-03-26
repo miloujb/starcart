@@ -9,6 +9,7 @@ import {
 	Card,
 	Loader,
 	Message,
+	Pagination,
 } from 'semantic-ui-react'
 import {
 	addFave
@@ -16,12 +17,16 @@ import {
 import {
 	nanoid
 } from '@reduxjs/toolkit'
-import FilmDetails
-	from './FilmDetails'
+import {
+	useState
+} from 'react'
 
 const Characters = () => {
+
+	const [page, setPage] = useState(1);
+	const pageSize = 10;
+
 	const {data, isError, isLoading} = useGetCharactersQuery();
-	console.log(data);
 	const dispatch = useDispatch();
 
 	const selectCharacters = e => {
@@ -29,7 +34,11 @@ const Characters = () => {
 		const character = data.results.find(character => character.name === name);
 		return character
 	}
-	const addToFavourites = e => dispatch(addFave(selectCharacters(e)))
+	const addToFavourites = e => dispatch(addFave(selectCharacters(e)));
+
+	const handlePagination = (e, {page}) => {
+		setPage(page);
+	}
 
 	if (isLoading) {
 		return <Loader active={isLoading} />
@@ -39,6 +48,7 @@ const Characters = () => {
 	}
 	if (data && Boolean(data?.results?.length)) {
 		return (
+			<div>
 			<Card.Group centered>
 				{data.results.map(character => (
 					<Card key={nanoid()}>
@@ -63,6 +73,9 @@ const Characters = () => {
 					</Card>
 				))}
 			</Card.Group>
+				<Pagination activePage={page} totalPages={Math.ceil(data.count / pageSize)}
+				onPageChange={handlePagination}/>
+			</div>
 		)
 	}
 	else if (data?.results?.length === 0) {
