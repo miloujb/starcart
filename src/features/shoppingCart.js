@@ -21,12 +21,18 @@ export const cartSlice = createSlice({
 	initialState,
 	reducer: {
 		addItem: (state, action) => {
-			// create item
+			const newItem = createItem(action.payload.item);
 			// add item to items
+			state.items.push(newItem);
+			state.total = state.prices[action.payload.itemType];
+			return state;
 		},
 		removeItem: (state, action) => {
 			// find fave
+			state.items = state.items.filter(item => item.id !== action.payload.id);
 			// remove fave
+			state.total -= state.prices[action.payload.itemType];
+			return state;
 		},
 	},
 })
