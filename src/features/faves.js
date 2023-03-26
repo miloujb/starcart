@@ -14,8 +14,11 @@ export const favesSlice = createSlice({
 	reducers: {
 		addFave: (state, action) => {
 			const name = action.payload.name ? action.payload.name : action.payload.title ? action.payload.title : 'no name'
-			const fave = createFave(action.payload, name)
-			state.push(fave)
+			if (!state.some(fave => fave.name === name)) {
+				const fave = createFave(action.payload, name)
+				state.push(fave)
+			}
+			else alert("This is already in your faves!")
 		},
 		updateFave: (state, action) => {
 			// find fave
