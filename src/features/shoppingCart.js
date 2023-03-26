@@ -34,6 +34,9 @@ export const cartSlice = createSlice({
 			state.total -= state.prices[action.payload.itemType];
 			return state;
 		},
+		editItem: (state, action) => {
+			return [...state, action.payload];
+		}
 	},
 })
 
