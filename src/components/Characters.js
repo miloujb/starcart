@@ -7,6 +7,7 @@ import {
 import {
 	Button,
 	Card,
+	List,
 	Loader,
 	Message,
 	Pagination,
@@ -55,11 +56,23 @@ const Characters = () => {
 						<Card.Content>
 							<Card.Header>{character.name}</Card.Header>
 							<Card.Meta>Films: {character.films.length}</Card.Meta>
-							Height: {character.height} cm
-							Weight: {character.mass} kg
-							Gender: {character.gender}
-							Eye Colour: {character.eye_color}
-							Hair Colour: {character.hair_color}
+							<List>
+								<List.Item>
+									Height: {character.height} cm
+								</List.Item>
+								<List.Item>
+									Weight: {character.mass} kg
+								</List.Item>
+								<List.Item>
+									Gender: {character.gender}
+								</List.Item>
+								<List.Item>
+									Eye Colour: {character.eye_color}
+								</List.Item>
+								<List.Item>
+									Hair Colour: {character.hair_color}
+								</List.Item>
+							</List>
 						</Card.Content>
 						<Card.Content extra>
 							<Button
